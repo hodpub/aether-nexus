@@ -1,6 +1,6 @@
 ![Aether Nexus](assets/art/logo.svg)
 
-![Foundry v13](https://img.shields.io/badge/foundry-v13-green) ![GitHub Downloads (specific asset, all releases)](https://img.shields.io/github/downloads/hodpub/fvtt-aether-nexus/system.zip)
+![Foundry v14](https://img.shields.io/badge/foundry-v14-green) ![GitHub Downloads (specific asset, all releases)](https://img.shields.io/github/downloads/hodpub/fvtt-aether-nexus/system.zip)
 
 
 The **official** system for Aether Nexus, from [Absolute Tabletop](https://absolutetabletop.com/).
