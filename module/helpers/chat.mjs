@@ -75,7 +75,7 @@ export async function createFoeStrikeChatMessage(actor, strike) {
     modifier: aspectModifierString,
     additionalTest: strike.system.testAspect
   };
-  let content = await renderTemplate(FoeStrikeTemplate, templateData);
+  let content = await foundry.applications.handlebars.renderTemplate(FoeStrikeTemplate, templateData);
   const chatData = {
     user: game.user.id,
     speaker: {
@@ -106,7 +106,7 @@ export async function createCharacterAttackChatMessage(actor, weapon) {
     bonus: weapon.bonus,
     bonusString: damageModifierString
   };
-  let content = await renderTemplate(CharacterAttackTemplate, templateData);
+  let content = await foundry.applications.handlebars.renderTemplate(CharacterAttackTemplate, templateData);
   const chatData = {
     user: game.user.id,
     speaker: {

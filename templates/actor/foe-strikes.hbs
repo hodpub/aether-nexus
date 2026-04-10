@@ -2,7 +2,7 @@
   {{#each strikes as |item key| }}
   <div class="foe-item" data-item-id="{{item.id}}" data-document-class="Item">
     {{{item.chargedSquare}}}
-    <a class='item-control rollable' data-action="roll" data-roll-type="foeStrike">
+    <a class='item-control rollable' data-action="roll" data-roll-type="foeStrike" {{#if (not item.available)}} disabled {{/if}}>
       <i class='fas fa-sword'></i>
       <label type='text' data-additional="{{item.system.description}}">{{item.name}}</label>
     </a>

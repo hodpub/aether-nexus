@@ -1,9 +1,10 @@
 import { rollAspect, rollDamage, rollFoeDamage } from "../helpers/rolls.mjs";
 
 export default class AetherNexussChatMessage extends ChatMessage {
-  async getHTML(...args) {
-    const html = await super.getHTML();
-    console.log(this);
+  async renderHTML({ canDelete, canClose = false, ...rest } = {}) {
+    const element = await super.renderHTML({ canDelete, canClose, ...rest });
+
+    const html = $(element);
 
     html.find(".foe-aspect-test").each((_, bt) => {
       bt.addEventListener("click", async (event) => {
@@ -51,6 +52,7 @@ export default class AetherNexussChatMessage extends ChatMessage {
         return rollAspect(actor, event.target.dataset, !event.shiftKey);
       });
     });
-    return html;
+
+    return html[0];
   }
 }

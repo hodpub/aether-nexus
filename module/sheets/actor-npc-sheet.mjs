@@ -105,7 +105,7 @@ export class AetherNexusActorNpcSheet extends AetherNexusBaseActorSheet {
         context.tab = context.tabs[partId];
         // Enrich biography info for display
         // Enrichment turns text like `[[/r 1d20]]` into buttons
-        context.enrichedBiography = await TextEditor.enrichHTML(
+        context.enrichedBiography = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
           this.actor.system.biography,
           {
             // Whether to show secret blocks in the finished html
@@ -205,6 +205,7 @@ export class AetherNexusActorNpcSheet extends AetherNexusBaseActorSheet {
 
     // Iterate through items, allocating to containers
     for (let i of this.document.items) {
+      i.available = true;
       if (i.system.chargeUp?.size > 0) {
         const values = Array.from(i.system.chargeUp).sort();
         let chargeUpText = "";
@@ -227,6 +228,7 @@ export class AetherNexusActorNpcSheet extends AetherNexusBaseActorSheet {
         if (i.system.charged) {
           chargedSquareClass = "fa-solid"
         }
+        i.available = i.system.charged;
         i.chargedSquare = `<i class="${chargedSquareClass} fa-square"></i>`
       }
       else {
@@ -309,7 +311,6 @@ export class AetherNexusActorNpcSheet extends AetherNexusBaseActorSheet {
 
   static async _chargeUp(event, target) {
     event.preventDefault();
-    this.toggleControls();
 
     const itemsChargeUp = this.actor.items.filter(it => it.system.chargeUp?.size > 0);
     if (itemsChargeUp.length == 0)
@@ -348,9 +349,9 @@ export class AetherNexusActorNpcSheet extends AetherNexusBaseActorSheet {
   _getItemContextOptions() {
     return [
       {
-        name: "SIDEBAR.Edit",
+        label: "SIDEBAR.Edit",
         icon: '<i class="fas fa-edit"></i>',
-        condition: _ => this.actor.isOwner,
+        visible: _ => this.actor.isOwner,
         callback: element => {
           const itemId = element.dataset.itemId;
           const item = this.actor.items.get(itemId);
@@ -358,9 +359,9 @@ export class AetherNexusActorNpcSheet extends AetherNexusBaseActorSheet {
         },
       },
       {
-        name: "SIDEBAR.Delete",
+        label: "SIDEBAR.Delete",
         icon: '<i class="fas fa-trash"></i>',
-        condition: _ => this.actor.isOwner,
+        visible: _ => this.actor.isOwner,
         callback: element => {
           const itemId = element.dataset.itemId;
           const item = this.actor.items.get(itemId);

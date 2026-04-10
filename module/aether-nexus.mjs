@@ -86,25 +86,25 @@ Hooks.once('init', function () {
   registerPauseSettings();
 
   // Register sheet application classes
-  Actors.unregisterSheet('core', ActorSheet);
-  Actors.registerSheet('aether-nexus', AetherNexusActorNpcSheet, {
+  foundry.documents.collections.Actors.unregisterSheet('core', foundry.appv1.sheets.ActorSheet);
+  foundry.documents.collections.Actors.registerSheet('aether-nexus', AetherNexusActorNpcSheet, {
     types: ["npc"],
     label: 'AETHER_NEXUS.SheetLabels.Npc',
   });
-  Actors.registerSheet('aether-nexus', AetherNexusActorNemesesSheet, {
+  foundry.documents.collections.Actors.registerSheet('aether-nexus', AetherNexusActorNemesesSheet, {
     types: ["nemeses"],
     label: 'AETHER_NEXUS.SheetLabels.Nemeses',
   });
-  Actors.registerSheet('aether-nexus', AetherNexusActorShipSheet, {
+  foundry.documents.collections.Actors.registerSheet('aether-nexus', AetherNexusActorShipSheet, {
     types: ["ship"],
     label: 'AETHER_NEXUS.SheetLabels.Ship',
   });
-  Actors.registerSheet('aether-nexus', AetherNexusActorSheet, {
+  foundry.documents.collections.Actors.registerSheet('aether-nexus', AetherNexusActorSheet, {
     types: ["character"],
     label: 'AETHER_NEXUS.SheetLabels.Actor',
   });
-  Items.unregisterSheet('core', ItemSheet);
-  Items.registerSheet('aether-nexus', AetherNexusItemSheet, {
+  foundry.documents.collections.Items.unregisterSheet('core', foundry.appv1.sheets.ItemSheet);
+  foundry.documents.collections.Items.registerSheet('aether-nexus', AetherNexusItemSheet, {
     makeDefault: true,
     label: 'AETHER_NEXUS.SheetLabels.Item',
   });

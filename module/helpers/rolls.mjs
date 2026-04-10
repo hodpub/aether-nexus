@@ -19,7 +19,7 @@ async function _createRollMessage(actor, data, roll) {
   };
 
   console.log(templateData);
-  let content = await renderTemplate(RollTemplate, templateData);
+  let content = await foundry.applications.handlebars.renderTemplate(RollTemplate, templateData);
 
   let chatData = {
     user: game.user.id,

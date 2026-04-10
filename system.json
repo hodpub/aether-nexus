@@ -2,10 +2,10 @@
   "id": "aether-nexus",
   "title": "Aether Nexus",
   "description": "The Aether Nexus system for FoundryVTT!",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "authors": [
     {
-      "name": "Cussa Mitre",
+      "name": "Cussa Mitre [Hod Publishing]",
       "url": "https://hodpub.com",
       "discord": "CussaMitre"
     }
@@ -17,9 +17,54 @@
         },
         "npc": {
             "htmlFields": ["biography"]
+        },
+        "nemesis": {
+            "htmlFields": ["biography"]
+        },
+        "ship": {
+            "htmlFields": ["biography"]
         }
     },
     "Item": {
+      "kin": {
+        "htmlFields": ["description"]
+      },
+      "frame": {
+        "htmlFields": ["description"]
+      },
+      "boon": {
+        "htmlFields": ["description"]
+      },
+      "augment": {
+        "htmlFields": ["description"]
+      },
+      "weapon": {
+        "htmlFields": ["description"]
+      },
+      "shield": {
+        "htmlFields": ["description"]
+      },
+      "foeTrait": {
+        "htmlFields": ["description"]
+      },
+      "foeAction": {
+        "htmlFields": ["description"]
+      },
+      "foeStrike": {
+        "htmlFields": ["description"]
+      },
+      "nemesesAsset": {
+        "htmlFields": ["description"]
+      },
+      "shipCrew": {
+        "htmlFields": ["description"]
+      },
+      "shipComponent": {
+        "htmlFields": ["description"]
+      },
+      "quality": {
+        "htmlFields": ["description"]
+      }
     }
   },
   "flags": {
@@ -41,8 +86,8 @@
     }
   ],
   "compatibility": {
-    "minimum": "13.348",
-    "verified": "13.348"
+    "minimum": "14",
+    "verified": "14.360"
   },
   "esmodules": ["module/aether-nexus.mjs"],
   "styles": ["css/aether-nexus.css"],

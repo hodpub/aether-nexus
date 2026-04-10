@@ -1,3 +1,6 @@
 packs/**/*
 **/.DS_Store
 css/*
+
+.linkedToFoundry
+foundry/

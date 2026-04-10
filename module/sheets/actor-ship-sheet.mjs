@@ -132,7 +132,7 @@ export class AetherNexusActorShipSheet extends AetherNexusBaseActorSheet {
         context.tab = context.tabs[partId];
         // Enrich biography info for display
         // Enrichment turns text like `[[/r 1d20]]` into buttons
-        context.enrichedBiography = await TextEditor.enrichHTML(
+        context.enrichedBiography = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
           this.actor.system.biography,
           {
             // Whether to show secret blocks in the finished html
@@ -155,7 +155,7 @@ export class AetherNexusActorShipSheet extends AetherNexusBaseActorSheet {
         break;
       case 'abilities':
         context.tab = context.tabs[partId];
-        context.enrichedAbility1Description = await TextEditor.enrichHTML(
+        context.enrichedAbility1Description = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
           this.actor.system.ability1Description,
           {
             // Whether to show secret blocks in the finished html
@@ -166,7 +166,7 @@ export class AetherNexusActorShipSheet extends AetherNexusBaseActorSheet {
             relativeTo: this.item,
           }
         );
-        context.enrichedAbility2Description = await TextEditor.enrichHTML(
+        context.enrichedAbility2Description = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
           this.actor.system.ability2Description,
           {
             // Whether to show secret blocks in the finished html
@@ -435,7 +435,6 @@ export class AetherNexusActorShipSheet extends AetherNexusBaseActorSheet {
 
   static async _changeSheetSize(event) {
     event.preventDefault();
-    this.toggleControls();
     const newScale = this.position.scale == 1 ? 0.5 : 1;
     this.setPosition({
       scale: newScale,
@@ -533,7 +532,7 @@ export class AetherNexusActorShipSheet extends AetherNexusBaseActorSheet {
    * @protected
    */
   async _onDrop(event) {
-    const data = TextEditor.getDragEventData(event);
+    const data = foundry.applications.ux.TextEditor.implementation.getDragEventData(event);
     const actor = this.actor;
     const allowed = Hooks.call('dropActorSheetData', actor, this, data);
     if (allowed === false) return;
@@ -803,7 +802,7 @@ export class AetherNexusActorShipSheet extends AetherNexusBaseActorSheet {
         dragover: this._onDragOver.bind(this),
         drop: this._onDrop.bind(this),
       };
-      return new DragDrop(d);
+      return new foundry.applications.ux.DragDrop.implementation(d);
     });
   }
 
@@ -856,9 +855,9 @@ export class AetherNexusActorShipSheet extends AetherNexusBaseActorSheet {
   _getItemContextOptions() {
     return [
       {
-        name: "SIDEBAR.Edit",
+        label: "SIDEBAR.Edit",
         icon: '<i class="fas fa-edit"></i>',
-        condition: _ => this.actor.isOwner,
+        visible: _ => this.actor.isOwner,
         callback: element => {
           const itemId = element.dataset.itemId;
           const item = this.actor.items.get(itemId);
@@ -866,9 +865,9 @@ export class AetherNexusActorShipSheet extends AetherNexusBaseActorSheet {
         },
       },
       {
-        name: "SIDEBAR.Delete",
+        label: "SIDEBAR.Delete",
         icon: '<i class="fas fa-trash"></i>',
-        condition: _ => this.actor.isOwner,
+        visible: _ => this.actor.isOwner,
         callback: element => {
           const itemId = element.dataset.itemId;
           const item = this.actor.items.get(itemId);

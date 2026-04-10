@@ -169,7 +169,7 @@ export class AetherNexusItemSheet extends api.HandlebarsApplicationMixin(
         break;
       case 'attributesKin':
         context.tab = context.tabs[partId];
-        context.enrichedUniqueTrait = await TextEditor.enrichHTML(
+        context.enrichedUniqueTrait = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
           this.item.system.uniqueTrait,
           {
             // Whether to show secret blocks in the finished html
@@ -180,7 +180,7 @@ export class AetherNexusItemSheet extends api.HandlebarsApplicationMixin(
             relativeTo: this.item,
           }
         );
-        context.enrichedNexusSurge = await TextEditor.enrichHTML(
+        context.enrichedNexusSurge = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
           this.item.system.nexusSurge,
           {
             // Whether to show secret blocks in the finished html
@@ -194,7 +194,7 @@ export class AetherNexusItemSheet extends api.HandlebarsApplicationMixin(
         break;
       case 'abilitiesFrame':
         context.tab = context.tabs[partId];
-        context.enrichedFrameAbility1Description = await TextEditor.enrichHTML(
+        context.enrichedFrameAbility1Description = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
           this.item.system.frameAbility1Description,
           {
             // Whether to show secret blocks in the finished html
@@ -205,7 +205,7 @@ export class AetherNexusItemSheet extends api.HandlebarsApplicationMixin(
             relativeTo: this.item,
           }
         );
-        context.enrichedFrameAbility2Description = await TextEditor.enrichHTML(
+        context.enrichedFrameAbility2Description = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
           this.item.system.frameAbility2Description,
           {
             // Whether to show secret blocks in the finished html
@@ -220,7 +220,7 @@ export class AetherNexusItemSheet extends api.HandlebarsApplicationMixin(
       case 'attributesWeapon':
       case 'attributesShield':
         context.tab = context.tabs[partId];
-        context.enrichedEffect = await TextEditor.enrichHTML(
+        context.enrichedEffect = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
           this.item.system.effect,
           {
             // Whether to show secret blocks in the finished html
@@ -234,7 +234,7 @@ export class AetherNexusItemSheet extends api.HandlebarsApplicationMixin(
         break;
       case 'abilitiesAugment':
         context.tab = context.tabs[partId];
-        context.enrichedAbility1Description = await TextEditor.enrichHTML(
+        context.enrichedAbility1Description = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
           this.item.system.ability1Description,
           {
             // Whether to show secret blocks in the finished html
@@ -245,7 +245,7 @@ export class AetherNexusItemSheet extends api.HandlebarsApplicationMixin(
             relativeTo: this.item,
           }
         );
-        context.enrichedAbility2Description = await TextEditor.enrichHTML(
+        context.enrichedAbility2Description = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
           this.item.system.ability2Description,
           {
             // Whether to show secret blocks in the finished html
@@ -259,7 +259,7 @@ export class AetherNexusItemSheet extends api.HandlebarsApplicationMixin(
         break;
       case 'abilitiesShipCrew':
         context.tab = context.tabs[partId];
-        context.enrichedAbility1Description = await TextEditor.enrichHTML(
+        context.enrichedAbility1Description = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
           this.item.system.ability1Description,
           {
             // Whether to show secret blocks in the finished html
@@ -270,7 +270,7 @@ export class AetherNexusItemSheet extends api.HandlebarsApplicationMixin(
             relativeTo: this.item,
           }
         );
-        context.enrichedAbility2Description = await TextEditor.enrichHTML(
+        context.enrichedAbility2Description = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
           this.item.system.ability2Description,
           {
             // Whether to show secret blocks in the finished html
@@ -281,7 +281,7 @@ export class AetherNexusItemSheet extends api.HandlebarsApplicationMixin(
             relativeTo: this.item,
           }
         );
-        context.enrichedAbility3Description = await TextEditor.enrichHTML(
+        context.enrichedAbility3Description = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
           this.item.system.ability3Description,
           {
             // Whether to show secret blocks in the finished html
@@ -297,7 +297,7 @@ export class AetherNexusItemSheet extends api.HandlebarsApplicationMixin(
         context.tab = context.tabs[partId];
         // Enrich description info for display
         // Enrichment turns text like `[[/r 1d20]]` into buttons
-        context.enrichedDescription = await TextEditor.enrichHTML(
+        context.enrichedDescription = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
           this.item.system.description,
           {
             // Whether to show secret blocks in the finished html
@@ -579,7 +579,7 @@ export class AetherNexusItemSheet extends api.HandlebarsApplicationMixin(
    * @protected
    */
   async _onDrop(event) {
-    const data = TextEditor.getDragEventData(event);
+    const data = foundry.applications.ux.TextEditor.implementation.getDragEventData(event);
     const item = this.item;
     const allowed = Hooks.call('dropItemSheetData', item, this, data);
     if (allowed === false) return;
@@ -749,7 +749,7 @@ export class AetherNexusItemSheet extends api.HandlebarsApplicationMixin(
         dragover: this._onDragOver.bind(this),
         drop: this._onDrop.bind(this),
       };
-      return new DragDrop(d);
+      return new foundry.applications.ux.DragDrop.implementation(d);
     });
   }
 
@@ -767,9 +767,9 @@ export class AetherNexusItemSheet extends api.HandlebarsApplicationMixin(
   _getItemContextOptions() {
     return [
       {
-        name: "SIDEBAR.Edit",
+        label: "SIDEBAR.Edit",
         icon: '<i class="fas fa-edit"></i>',
-        condition: _ => this.actor.isOwner,
+        visible: _ => this.actor.isOwner,
         callback: element => {
           const itemId = element.dataset.itemId;
           const item = this.actor.items.get(itemId);
@@ -777,9 +777,9 @@ export class AetherNexusItemSheet extends api.HandlebarsApplicationMixin(
         },
       },
       {
-        name: "SIDEBAR.Delete",
+        label: "SIDEBAR.Delete",
         icon: '<i class="fas fa-trash"></i>',
-        condition: _ => this.actor.isOwner,
+        visible: _ => this.actor.isOwner,
         callback: async element => {
           const itemId = element.dataset.itemId;
           const item = this.actor.items.get(itemId);
