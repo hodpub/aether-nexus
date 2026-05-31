@@ -22,7 +22,7 @@ export default class AetherNexussChatMessage extends ChatMessage {
       html.find(".foe-damage-roll").hide();
       html.find(".character-damage-roll").hide();
       html.find(".character-aspect-test").hide();
-      return html;
+      return html[0];
     }
 
     html.find(".foe-damage-roll").each((_, bt) => {
